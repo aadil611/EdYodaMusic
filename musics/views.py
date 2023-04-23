@@ -19,9 +19,9 @@ def upload_music(request):
         if music.upload_mode == "protected":
             shared_with_emails = request.POST['shared-with'].split(',')
             shared_with_users = []
-            for user in shared_with_emails:
+            for email in shared_with_emails:
                 try:
-                    shared_with_users.append(User.objects.get(email=user))
+                    shared_with_users.append(User.objects.get(email=email))
                 except User.DoesNotExist:
                     errors.append("User with email {} does not exist".format(user))
             music.shared_with.set(shared_with_users)
